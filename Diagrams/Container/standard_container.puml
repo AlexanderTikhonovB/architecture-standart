@@ -1,5 +1,5 @@
 @startuml
-title warmhouse container diagramm
+title Standard bank container diagramm
 
 top to bottom direction
 
@@ -7,89 +7,81 @@ top to bottom direction
 
 'users
 Person(User, "Registered User", "Standard registered user")
+Person(DepositManager,"Deposit manager", "Manager from Deposit department")
 
 'system external
-System(externalelements,"warmhouse end elements","Sensors hotpot, video, switch and etc.")
-System_Ext(vendors,"vendor end elements","Sacribe vendor sensor, hopot, video, switch and etc.")
-System_Ext(bank, "Bank System", "External bank for processing payments")
-System_Ext(infosystem, "Info system smtp/telegram and etc.", "External system for userinfo")
+System_Ext(CB,"Central Bank","Send daily rate")
+System_Ext(Telecom, "Telecom provider", "Telecom provider for send SMS")
 
 ' System
-System(warmhouse, "warmhouse system", "System managing memberships, end element, database and payments")
+System(SMSGateway, "SMS Gateway", "SMS Gateway for generated and send sms code")
+System(E_mailGateway, "e_mail system","e_mail system for get CB rate and notification system")
+System(ABS,"ABS Standard Bank","Monolith ABS")
 
-' containers
-System_Boundary(warmhouse, "warmhouse system") {
+ContainerDb(PostgreSQL,"PostgreSQL Database", "New PostreSQL DB for deposite microservice")
+ContainerDb(Oracle,"Database for old ABS")
+System(Kafka,"Kafka brocker","New Kafka broker")
+System(WebApp,"Web app for site","web App for Site")
+System(InternetBank,"Standard internet bank", "Internal Standard internet bank")
+System(SQLAdapter,"SQL Adatper to DataBase", "SQL Adapter for PostgreSQL")
+
+
+System_Boundary(WebApp, "Web App") {
 'UI
-    Container(userwebApp, "UserWeb", "Code?", "Web for end user")
-    Container(mobileApp, "Mobile App", "Code?", "Mobile end user interface")
-    Container(techuserwebApp,"TechWeb","Code?","Web for admin and support user")
-
+    Container(UserWebApp, "UserWeb", "Node.js?", "Web for end user")
 'API
-    Container(upextdescription,"Ged data from vendor API", "Code?","Service for upload vendor element description")
-    Container(adminendelement,"End User API", "Code?","Service for add, administration and trigger end element for end user")
-    Container(streaming,"Sreaming API","Code?", "Streaming from house to end user")
+    Container(ServerSide,"Server side","Django?","Web for admin and support user")
+'connect internal
+    Rel(UserWebApp, ServerSide, "Get static data and request for deposit")
+'connect external
 
-'PaymentService
-    Container(paymentservice, "PaymentService", "Code?", "Payment service")
-
-'Auth
-    Container(securitylist, "Security list and roles","Kerberos","Database for users and roles")
-    Container(authService,  "Security Service","OAuth2", "Security Service")
-
-'Data
-    Container(endelementdatabase,"End DB","PostsreSQL","DB for vendor end element")
-    Container(userdescriptiondatabase,"User DB","PostgreSQL","DB for user elements list and triggering")
-    Container(userpaymentdata,  "PaymentData","PostgreSQL","Data about user payment")
-
-' connect internal
-' user
-Rel(user, userwebApp, "Control and amninistrate end element")
-Rel(user, mobileApp, "Control and amninistrate end element")
-Rel(admin, techuserwebApp, "Administrate system, connect to vendor, payment control")
-Rel(support, techuserwebApp, "Support end user")
-
-'system from UI
-Rel(userwebApp, adminendelement, "Contrao end element and rules")
-Rel(userwebApp, streaming,"Streaming from video end element")
-Rel(mobileApp, streaming,"Streaming from video end element")
-Rel(mobileApp, adminendelement,"Streaming from video end element")
-
-'System from system
-Rel(techuserwebApp,upextdescription,"Upload description for end element")
-Rel(upextdescription,endelementdatabase,"Upload vendor end element")
-
-'Database
-Rel(paymentservice,userpaymentdata,"History data about payment")
-Rel(adminendelement,userdescriptiondatabase,"Control and create data from end element")
-Rel(adminendelement,endelementdatabase,"Get info about end element")
-
-'Auth
-Rel(userwebApp,authService,"Security control and create jwt")
-Rel(mobileApp,authService,"Security control and create jwt")
-Rel(techuserwebApp,authService,"Security control and create jwt")
-Rel(techuserwebApp,securitylist,"Administration and control security")
-Rel(authService,securitylist,"Check roles")
-
-'Payment
-Rel(userwebApp,paymentservice,"Payment and conrole")
-Rel(mobileApp,paymentservice,"Payment and conrole")
-Rel(techuserwebApp,paymentservice, "control Payment")
 }
 
-'connect external
-'system from UI
-Rel(streaming,externalelements,"Get videosreaming")
+System_Boundary(InternetBank, "Web App") {
+    'Container(Deposit,"Deposit microservice","New deposit microservice")
+    Container(NewInternetBank,"New Internet bank","Django","New code for internet bank for deposit")
+    Container(WebForInternetBank,"InternetBank web client","Node.js","Client for internet bank")
+    Container(OldInternetBank,"Old internet bank","Old code for deposit")
+    Container(InternetBankGateway,"Gateway for InternetBank","Gateway")
 
-'System from system
-Rel(adminendelement,externalelements,"Control end element")
-Rel(upextdescription,vendors,"Upload vendor end element")
+    Rel(NewInternetBank,SQLAdapter, "Data request", "SQL")
+    Rel(InternetBankGateway,NewInternetBank,"request for deposit")
+    Rel(InternetBankGateway,OldInternetBank,"Old Request")
+    Rel(WebForInternetBank,InternetBankGateway,"Old Request")
+}
 
-'Payment
-Rel(paymentservice,bank,"Payment control")
+'UI
+Rel(User, UserWebApp,"Use Standard Bakn internet-bank", TLS)
 
-'info
-Rel(paymentservice,infosystem,"Send user payment info")
-Rel(authService,infosystem,"Send security info")
-Rel(adminendelement,infosystem,"Send house info")
+
+ 'Rel(ABS,E_mailGateway,"Get daily rate",pop3)
+Rel(CB,E_mailGateway,"Send daily rate", "smtp")
+
+Rel(User,WebForInternetBank,"Data for authenticated user")
+
+Rel(NewInternetBank, SMSGateway,"Send request for SMS")
+
+Rel(SMSGateway,Telecom,"Send SMS code and phone number")
+
+Rel_U(Telecom,User,"Send SMS code")
+
+Rel(NewInternetBank,E_mailGateway,"get daily rate","pop3")
+
+Rel(SMSGateway, InternetBankGateway, "Return SMS code")
+
+Rel(OldInternetBank, ABS,"Old request any format")
+Rel(SQLAdapter, PostgreSQL,"Data request", "SQL")
+
+
+Rel(SQLAdapter,ABS,"old format request","SQL")
+
+Rel(ABS,Oracle,"Data from old ABS")
+
+Rel(ServerSide,ABS,"Get static data by crone")
+
+Rel_R(NewInternetBank,DepositManager,"Request to confirm rate")
+
+Rel(ABS,Kafka,"Send data about client accounts")
+Rel(NewInternetBank,Kafka,"subscribe to current acccouts")
 
 @enduml
