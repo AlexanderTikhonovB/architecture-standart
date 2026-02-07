@@ -18,6 +18,8 @@ System(SMSGateway, "SMS Gateway", "SMS Gateway for generated and send sms code")
 System(E_mailGateway, "e_mail system","e_mail system for get CB rate and notification system")
 System(ABS,"ABS Standard Bank","Monolith ABS")
 
+System(Security,"Security sytem for Standard Bank")
+
 ContainerDb(PostgreSQL,"PostgreSQL Database", "New PostreSQL DB for deposite microservice")
 ContainerDb(Oracle,"Database for old ABS")
 System(Kafka,"Kafka brocker","New Kafka broker")
@@ -28,9 +30,9 @@ System(SQLAdapter,"SQL Adatper to DataBase", "SQL Adapter for PostgreSQL")
 
 System_Boundary(WebApp, "Web App") {
 'UI
-    Container(UserWebApp, "UserWeb", "Node.js?", "Web for end user")
+    Container(UserWebApp, "UserWeb", "React.js", "Web for end user")
 'API
-    Container(ServerSide,"Server side","Django?","Web for admin and support user")
+    Container(ServerSide,"Server side","SpringBoot","Web for admin and support user")
 'connect internal
     Rel(UserWebApp, ServerSide, "Get static data and request for deposit")
 'connect external
@@ -79,9 +81,12 @@ Rel(ABS,Oracle,"Data from old ABS")
 
 Rel(ServerSide,ABS,"Get static data by crone")
 
-Rel_R(NewInternetBank,DepositManager,"Request to confirm rate")
+Rel(NewInternetBank,DepositManager,"Request to confirm rate")
 
 Rel(ABS,Kafka,"Send data about client accounts")
 Rel(NewInternetBank,Kafka,"subscribe to current acccouts")
+
+'Rel_R(ServerSide,Security,"Authrntication user and get roles")
+Rel(WebForInternetBank,Security,"Authrntication user and get roles")
 
 @enduml
