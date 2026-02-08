@@ -31,9 +31,11 @@ System(SQLAdapter,"SQL Adatper to DataBase", "SQL Adapter for PostgreSQL")
 System_Boundary(WebApp, "Web App") {
 'UI
     Container(UserWebApp, "UserWeb", "React.js", "Web for end user")
+    Container(Nginx, "Nginx","Reverse proxy")
 'API
-    Container(ServerSide,"Server side","SpringBoot","Web for admin and support user")
+    Container(ServerSide,"Server side","SpringBoot","Web for old User")
 'connect internal
+    Rel(Nginx,UserWebApp,"Proxy")
     Rel(UserWebApp, ServerSide, "Get static data and request for deposit")
 'connect external
 
@@ -53,7 +55,7 @@ System_Boundary(InternetBank, "Web App") {
 }
 
 'UI
-Rel(User, UserWebApp,"Use Standard Bakn internet-bank", TLS)
+Rel(User, Nginx,"Use Standard Bakn internet-bank", TLS)
 
 
  'Rel(ABS,E_mailGateway,"Get daily rate",pop3)
