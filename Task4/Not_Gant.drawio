@@ -1,0 +1,64 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.6 Chrome/140.0.7339.249 Electron/38.8.0 Safari/537.36" version="29.3.6">
+  <diagram name="Страница-1" id="_HAOKiYQRcI8s3_rBpW8">
+    <mxGraphModel dx="1298" dy="899" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-3" parent="1" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="" vertex="1">
+          <mxGeometry height="80" width="670" x="130" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Сайт" vertex="1">
+          <mxGeometry height="60" width="120" x="10" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Новый интернет банк" vertex="1">
+          <mxGeometry height="100" width="120" x="10" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="SQL GateWay" vertex="1">
+          <mxGeometry height="60" width="120" x="10" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="660" x="140" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="100" width="660" x="140" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="660" x="140" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="АБС" vertex="1">
+          <mxGeometry height="60" width="120" x="10" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="660" x="140" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Серверная часть" vertex="1">
+          <mxGeometry height="20" width="130" x="150" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Клиентская часть" vertex="1">
+          <mxGeometry height="20" width="130" x="280" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Разработка модуля расчета ставок" vertex="1">
+          <mxGeometry height="20" width="130" x="150" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Публикация ставок" vertex="1">
+          <mxGeometry height="20" width="70" x="280" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Получение движения по счетам" vertex="1">
+          <mxGeometry height="20" width="240" x="400" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Авто-загрузка ставок ЦБ" vertex="1">
+          <mxGeometry height="20" width="84" x="640" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="модуль работы с PostgreSQL" vertex="1">
+          <mxGeometry height="20" width="120" x="150" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Отправка движения по счетам" vertex="1">
+          <mxGeometry height="20" width="130" x="154" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="PkbQBiZr6BlrxuDa5-PH-22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="API запросы по получению счетов" vertex="1">
+          <mxGeometry height="20" width="130" x="270" y="460" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
